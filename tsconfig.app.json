@@ -25,5 +25,5 @@
       "*": ["*"] // Create alias for utils
     }
   },
-  "include": ["src", "src/test/setupTest.ts"]
+  "include": ["src", "src/setupTest/setupTest.ts"]
 }

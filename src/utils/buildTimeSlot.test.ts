@@ -4,7 +4,7 @@ import {
   generateTimeSlots,
   TimeSlots,
   TimeSlotsWithHeight,
-} from "./utils";
+} from "./buildTimeSlot";
 
 describe("utils", () => {
   describe("generateTimeSlots", () => {
