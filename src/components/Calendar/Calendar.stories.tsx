@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar as CalendarComponent } from "./Calendar";
 
 const meta: Meta<typeof CalendarComponent> = {
-  title: "Component/Button",
+  title: "Component/Calendar",
   component: CalendarComponent,
   args: {
     workingHours: {

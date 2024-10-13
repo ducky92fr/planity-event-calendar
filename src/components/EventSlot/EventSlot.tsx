@@ -16,6 +16,9 @@ const EventContainer = styled.div<Styling>`
   background-color: lightblue;
   border: 1px solid blue;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface EventProps {
