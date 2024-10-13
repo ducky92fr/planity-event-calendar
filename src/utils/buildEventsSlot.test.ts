@@ -1,18 +1,18 @@
 import {
   EventsSlot,
   EventsSlotToDisplay,
-  generateEventsSlot,
+  buildEventsSlotWithPosition,
   ScreenDimension,
 } from "./buildEventsSlot";
 
-describe("generateEventsSlot", () => {
+describe("buildEventsSlotWithPosition", () => {
   const useCases: Array<{
     description: string;
     events: EventsSlot;
     screenDimension: ScreenDimension;
     expectedResult: EventsSlotToDisplay;
-    pixelPerMinute: number;
-    openingTime: string;
+    pixelsForEachMinute: number;
+    calendarStartTime: string;
   }> = [
     {
       description:
@@ -24,8 +24,8 @@ describe("generateEventsSlot", () => {
           duration: 60,
         },
       ],
-      pixelPerMinute: 1.25,
-      openingTime: "9:00",
+      pixelsForEachMinute: 1.25,
+      calendarStartTime: "9:00",
       screenDimension: { height: 900, width: 1400 },
       expectedResult: [{ id: 1, top: 0, left: 0, width: 1400, height: 75 }],
     },
@@ -36,16 +36,16 @@ describe("generateEventsSlot", () => {
       description,
       events,
       screenDimension,
-      pixelPerMinute,
+      pixelsForEachMinute,
       expectedResult,
-      openingTime,
+      calendarStartTime,
     }) => {
       test(description, () => {
-        const result = generateEventsSlot(
+        const result = buildEventsSlotWithPosition(
           events,
           screenDimension,
-          pixelPerMinute,
-          openingTime
+          pixelsForEachMinute,
+          calendarStartTime
         );
         expect(result).toEqual(expectedResult);
       });

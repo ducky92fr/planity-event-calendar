@@ -1,3 +1,5 @@
+import { timeToMinutes } from "./utils";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 type EventSlot = {
   id: number;
@@ -19,13 +21,32 @@ export type EventsSlotToDisplay = {
   height: number;
 }[];
 
-export const generateEventsSlot = (
+export const buildEventsSlotWithPosition = (
   events: EventsSlot,
   screenDimension: ScreenDimension,
-  pixelPerMinute: number,
-  openingTime: string
+  pixelsForEachMinute: number,
+  calendarStartTime: string
 ): EventsSlotToDisplay => {
-  //fakeData
-  const eventSlots = [{ id: 1, top: 1, left: 1, width: 1, height: 1 }];
+  const { width: screenWidth } = screenDimension;
+  const eventWidth = screenWidth;
+  const eventHorizontalPosition = 0;
+
+  const calendarStartTimeInMinutes = timeToMinutes(calendarStartTime);
+
+  const eventSlots = events.map((event) => {
+    const eventStarTimeInMinutes = timeToMinutes(event.start);
+    const eventVerticalPosition =
+      (eventStarTimeInMinutes - calendarStartTimeInMinutes) *
+      pixelsForEachMinute;
+    const eventHeight = event.duration * pixelsForEachMinute;
+
+    return {
+      id: event.id,
+      top: eventVerticalPosition,
+      left: eventHorizontalPosition,
+      width: eventWidth,
+      height: eventHeight,
+    };
+  });
   return eventSlots;
 };
