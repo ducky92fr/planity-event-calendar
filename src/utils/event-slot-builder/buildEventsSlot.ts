@@ -65,8 +65,7 @@ export const buildEventsSlotWithPosition = (
         eventOverLappingToCurrentEventPosition?.left != 0
       ) {
         eventLeft = 0;
-        eventWidth =
-          screenWidth - eventOverLappingToCurrentEventPosition?.width;
+        eventWidth = eventOverLappingToCurrentEventPosition?.width;
       }
     }
 
