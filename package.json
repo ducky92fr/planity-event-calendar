@@ -16,9 +16,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-virtualized-auto-sizer": "^1.0.24",
-    "react-window": "^1.8.10"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",

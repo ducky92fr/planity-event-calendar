@@ -14,6 +14,7 @@ const EventContainer = styled.div<Position>`
   left: ${({ left }) => `${left}px`};
   width: ${({ width }) => `${width}px`};
   background-color: lightblue;
+  color: black;
   border: 1px solid blue;
   box-sizing: border-box;
   display: flex;

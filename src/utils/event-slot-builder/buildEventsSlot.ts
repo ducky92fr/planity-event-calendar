@@ -16,6 +16,7 @@ type ParamsBuildEventsSlotWithPosition = {
   pixelsForEachMinute: PixelPerMinute;
   calendarStartTime: string;
 };
+
 export const buildEventsSlotWithPosition = ({
   events,
   screenDimension,

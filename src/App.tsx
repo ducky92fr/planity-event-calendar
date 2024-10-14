@@ -1,15 +1,13 @@
 import { Calendar } from "components/Calendar/Calendar";
-import "./App.css";
-import { useEffect, useState } from "react";
-import { ScreenDimension } from "utils/event-slot-builder/types";
+
 import { WorkingHours } from "types";
 import inputData from "./input.json";
 
 import { buildEventsSlotWithPosition } from "utils/event-slot-builder/buildEventsSlot";
 import { EventSlot } from "components/EventSlot/EventSlot";
 import { calculatePixelHeightPerMinute } from "utils/utils";
+import { useResize } from "hooks/useResize";
 
-const minimumHeight = 600;
 const workingHours: WorkingHours = {
   openingTime: {
     hour: 9,
@@ -23,38 +21,19 @@ const workingHours: WorkingHours = {
 const calendarStartTime = "9:00";
 
 function App() {
-  const initialScreenDimension = {
-    screenHeight: window.innerHeight,
-    screenWidth: window.innerWidth,
-  };
-  const [screenDimension, setScreenDimension] = useState<ScreenDimension>(
-    initialScreenDimension
-  );
-
-  useEffect(() => {
-    const handleResize = (): void => {
-      const newScreenDimension = {
-        screenHeight:
-          window.innerHeight < minimumHeight
-            ? minimumHeight
-            : window.innerHeight,
-        screenWidth: window.innerWidth,
-      };
-      setScreenDimension(newScreenDimension);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screenDimension = useResize();
 
   const pixelsForEachMinute = calculatePixelHeightPerMinute(
     workingHours,
     screenDimension
   );
+
   const events = buildEventsSlotWithPosition({
     events: inputData,
-    screenDimension,
+    screenDimension: {
+      screenHeight: screenDimension.screenHeight,
+      screenWidth: screenDimension.screenWidth - 100,
+    },
     pixelsForEachMinute,
     calendarStartTime,
   });
@@ -69,5 +48,4 @@ function App() {
     </Calendar>
   );
 }
-
 export default App;
