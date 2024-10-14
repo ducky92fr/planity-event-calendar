@@ -68,11 +68,13 @@ export const calculateTimeSlotsWithHeight = (
   timeSlots: TimeSlots,
   screenHeight: number
 ): TimeSlotsWithHeight => {
-  const height = screenHeight / timeSlots.length;
+  const pixelsPerMinute = screenHeight / ((timeSlots.length - 1) * 30);
   const minHeight = 24;
-
-  return timeSlots.map((time) => ({
+  const height = Math.floor(pixelsPerMinute * 30);
+  const result = timeSlots.map((time) => ({
     time,
     height: height < minHeight ? minHeight : height,
   }));
+  result.pop();
+  return result;
 };

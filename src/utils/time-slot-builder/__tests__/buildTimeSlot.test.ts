@@ -75,36 +75,42 @@ describe("utils", () => {
     }> = [
       {
         description:
-          "should calculate correct height when screenHeight is evenly divisible by number of time slots",
+          "should calculate correct height when screenHeight is evenly divisible by the number of time slots, and pop the last time slot",
         timeSlots: ["09:00", "09:30", "10:00"],
         screenHeight: 600,
         expectedResult: [
-          { time: "09:00", height: 200 },
-          { time: "09:30", height: 200 },
-          { time: "10:00", height: 200 },
+          { time: "09:00", height: 300 },
+          { time: "09:30", height: 300 },
         ],
       },
       {
         description:
-          "should use minimum height for each time slot when calculated height is less than minimum",
-        timeSlots: ["09:00", "09:30", "10:00", "10:30"],
+          "should use minimum height for each time slot when calculated height is less than the minimum, and pop the last time slot",
+        timeSlots: [
+          "09:00",
+          "09:30",
+          "10:00",
+          "10:30",
+          "11:00",
+          "11:30",
+          "12:00",
+        ],
         screenHeight: 80,
         expectedResult: [
           { time: "09:00", height: 24 },
           { time: "09:30", height: 24 },
           { time: "10:00", height: 24 },
           { time: "10:30", height: 24 },
+          { time: "11:00", height: 24 },
+          { time: "11:30", height: 24 },
         ],
       },
       {
         description:
-          "should calculate correct height when screenHeight is not evenly divisible by the number of time slots",
+          "should calculate correct height when screenHeight is not evenly divisible by the number of time slots, and pop the last time slot",
         timeSlots: ["09:00", "09:30"],
         screenHeight: 250,
-        expectedResult: [
-          { time: "09:00", height: 125 },
-          { time: "09:30", height: 125 },
-        ],
+        expectedResult: [{ time: "09:00", height: 250 }],
       },
     ];
 

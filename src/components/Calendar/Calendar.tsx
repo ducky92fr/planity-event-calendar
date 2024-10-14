@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useResize } from "hooks/useResize";
 
 import { WorkingHours } from "types";
 
