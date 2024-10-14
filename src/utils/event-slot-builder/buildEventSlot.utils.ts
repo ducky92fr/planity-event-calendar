@@ -17,7 +17,6 @@ export const findOverlappingEvents = (
 
     for (let j = i + 1; j < sortedEvents.length; j++) {
       const otherEvent = sortedEvents[j];
-
       if (
         otherEvent.eventStartingVerticalPosition <
         event.eventEndingVerticalPosition
@@ -76,7 +75,7 @@ export const filterMutualOverlaps = (
 
   for (const [event, overlaps] of eventOverlaps.entries()) {
     const nonOverlappingGroup: number[] = [];
-    const grouped: number[] = [];
+    const overlapGroup: number[] = [];
 
     // Process overlaps: avoid grouping events that overlap with each other
     overlaps.forEach((overlapEvent) => {
@@ -91,7 +90,7 @@ export const filterMutualOverlaps = (
 
       // If mutual overlaps exist, keep them separate
       if (mutualOverlapExists) {
-        grouped.push(overlapEvent);
+        overlapGroup.push(overlapEvent);
       } else {
         // Otherwise, group them together in non-overlapping group
         nonOverlappingGroup.push(overlapEvent);
@@ -102,7 +101,10 @@ export const filterMutualOverlaps = (
     if (nonOverlappingGroup.length > 1) {
       groupedOverlaps.set(event, [nonOverlappingGroup]);
     } else {
-      groupedOverlaps.set(event, grouped.length > 0 ? grouped : overlaps);
+      groupedOverlaps.set(
+        event,
+        overlapGroup.length > 0 ? overlapGroup : overlaps
+      );
     }
   }
   return groupedOverlaps;

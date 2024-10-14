@@ -10,13 +10,19 @@ import {
   ScreenDimension,
 } from "./types";
 
-export const buildEventsSlotWithPosition = (
-  events: EventsSlot,
-  screenDimension: ScreenDimension,
-  pixelsForEachMinute: PixelPerMinute,
-  calendarStartTime: string
-): EventsSlotToDisplay => {
-  const { width: screenWidth } = screenDimension;
+type ParamsBuildEventsSlotWithPosition = {
+  events: EventsSlot;
+  screenDimension: ScreenDimension;
+  pixelsForEachMinute: PixelPerMinute;
+  calendarStartTime: string;
+};
+export const buildEventsSlotWithPosition = ({
+  events,
+  screenDimension,
+  pixelsForEachMinute,
+  calendarStartTime,
+}: ParamsBuildEventsSlotWithPosition): EventsSlotToDisplay => {
+  const { screenWidth } = screenDimension;
   const eventsWithTimeToMinute = events.map((event) =>
     convertEventsTimeToMinute(event, calendarStartTime, pixelsForEachMinute)
   );

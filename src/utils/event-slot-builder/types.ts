@@ -8,8 +8,8 @@ export type EventsSlot = EventSlot[];
 export type EventOverlapsRecord = Map<number, number[]>;
 
 export type ScreenDimension = {
-  height: number;
-  width: number;
+  screenHeight: number;
+  screenWidth: number;
 };
 
 export type PixelPerMinute = number;

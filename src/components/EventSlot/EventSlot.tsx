@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 
-type Styling = {
+type Position = {
   top: number;
   left: number;
   height: number;
   width: number;
 };
 
-const EventContainer = styled.div<Styling>`
+const EventContainer = styled.div<Position>`
   position: absolute;
   top: ${({ top }) => `${top}px`};
   height: ${({ height }) => `${height}px`};
@@ -23,10 +23,11 @@ const EventContainer = styled.div<Styling>`
 
 interface EventProps {
   id: number;
-  styling: Styling;
+  position: Position;
 }
-export const EventSlot = ({ id, styling }: EventProps) => {
-  const { top, left, height, width } = styling;
+
+export const EventSlot = ({ id, position }: EventProps) => {
+  const { top, left, height, width } = position;
   return (
     <EventContainer top={top} left={left} height={height} width={width}>
       {id}

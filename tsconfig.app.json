@@ -22,7 +22,8 @@
     "types": ["vitest/globals"],
     "baseUrl": "src",
     "paths": {
-      "*": ["*"] // Create alias for utils
+      "*": ["*"],
+      "components/*": ["components/*"]
     }
   },
   "include": ["src", "src/setupTest/setupTest.ts"]

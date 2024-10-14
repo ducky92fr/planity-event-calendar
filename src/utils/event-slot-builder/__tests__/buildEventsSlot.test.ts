@@ -1,6 +1,10 @@
 import { buildEventsSlotWithPosition } from "../buildEventsSlot";
 import { EventsSlot, EventsSlotToDisplay, ScreenDimension } from "../types";
 
+const screenDimension = { screenHeight: 900, screenWidth: 1400 };
+const calendarStartTime = "9:00";
+const pixelsForEachMinute = 1.25;
+
 describe("buildEventSlot", () => {
   describe("buildEventsSlotWithPosition", () => {
     const useCases: Array<{
@@ -31,9 +35,9 @@ describe("buildEventSlot", () => {
             duration: 50,
           },
         ],
-        pixelsForEachMinute: 1.25,
-        calendarStartTime: "9:00",
-        screenDimension: { height: 900, width: 1400 },
+        pixelsForEachMinute,
+        calendarStartTime,
+        screenDimension,
         expectedResult: [
           { id: 1, top: 0, left: 0, width: 1400, height: 75 },
           { id: 2, top: 75, left: 0, width: 1400, height: 75 },
@@ -65,9 +69,9 @@ describe("buildEventSlot", () => {
             duration: 50,
           },
         ],
-        pixelsForEachMinute: 1.25,
-        calendarStartTime: "9:00",
-        screenDimension: { height: 900, width: 1400 },
+        pixelsForEachMinute,
+        calendarStartTime,
+        screenDimension,
         expectedResult: [
           { id: 1, top: 0, left: 0, width: 1400 / 4, height: 75 },
           { id: 2, top: 18.75, left: 1400 / 4, width: 1400 / 4, height: 75 },
@@ -112,9 +116,9 @@ describe("buildEventSlot", () => {
             duration: 30,
           },
         ],
-        pixelsForEachMinute: 1.25,
-        calendarStartTime: "9:00",
-        screenDimension: { height: 900, width: 1400 },
+        pixelsForEachMinute,
+        calendarStartTime,
+        screenDimension,
         expectedResult: [
           { id: 2, top: 93.75, left: 0, width: 700, height: 250 },
           { id: 3, top: 93.75, left: 700, width: 700, height: 125 },
@@ -152,9 +156,9 @@ describe("buildEventSlot", () => {
             duration: 30,
           },
         ],
-        pixelsForEachMinute: 1.25,
-        calendarStartTime: "9:00",
-        screenDimension: { height: 900, width: 1400 },
+        pixelsForEachMinute,
+        calendarStartTime,
+        screenDimension,
         expectedResult: [
           { id: 1, top: 0, left: 0, width: 1400, height: 75 },
           { id: 2, top: 93.75, left: 0, width: 700, height: 250 },
@@ -188,9 +192,9 @@ describe("buildEventSlot", () => {
             duration: 60,
           },
         ],
-        pixelsForEachMinute: 1.25,
-        calendarStartTime: "9:00",
-        screenDimension: { height: 900, width: 1400 },
+        pixelsForEachMinute,
+        calendarStartTime,
+        screenDimension,
         expectedResult: [
           { id: 1, top: 0, left: 0, width: 1400 / 3, height: 25 },
           { id: 2, top: 18.75, left: 1400 / 3, width: 1400 / 3, height: 25 },
@@ -221,12 +225,12 @@ describe("buildEventSlot", () => {
         calendarStartTime,
       }) => {
         test(description, () => {
-          const result = buildEventsSlotWithPosition(
+          const result = buildEventsSlotWithPosition({
             events,
             screenDimension,
             pixelsForEachMinute,
-            calendarStartTime
-          );
+            calendarStartTime,
+          });
           expect(result).toEqual(expectedResult);
         });
       }

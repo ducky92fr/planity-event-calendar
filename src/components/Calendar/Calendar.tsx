@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 import { WorkingHours } from "types";
-import { ScreenDimension } from "utils/buildEventsSlot";
+
+import { ScreenDimension } from "utils/event-slot-builder/types";
 import {
   calculateTimeSlotsWithHeight,
   generateTimeSlots,
-} from "utils/buildTimeSlot";
+} from "utils/time-slot-builder/buildTimeSlot";
 
 const CalendarContainer = styled.div<ScreenDimension>`
   display: flex;
-  height: ${({ height }) => `${height}px`};
-  width: ${({ width }) => `${width}px`};
+  height: ${({ screenHeight }) => `${screenHeight}px`};
+  width: ${({ screenWidth }) => `${screenWidth}px`};
   border: 1px solid #ccc;
   overflow-y: auto;
 `;
@@ -40,38 +40,30 @@ const TimeSlot = styled.div<{ height: number }>`
   color: #333;
   background-color: #f0f0f0;
 `;
+
 interface CalendarProps {
   workingHours: WorkingHours;
+  screenDimension: ScreenDimension;
+  children: React.ReactNode;
 }
 
-const minimumHeight = 600;
-
-export const Calendar = ({ workingHours }: CalendarProps) => {
+export const Calendar = ({
+  workingHours,
+  screenDimension,
+  children,
+}: CalendarProps) => {
   const { openingTime, closingTime } = workingHours;
+  const { screenWidth, screenHeight } = screenDimension;
 
   const timeSlots = generateTimeSlots(openingTime, closingTime);
 
-  const [windowHeight, setWindowHeight] = useState<number>(900);
-
   const timeSlotsWithHeight = calculateTimeSlotsWithHeight(
     timeSlots,
-    windowHeight
+    screenHeight
   );
 
-  useEffect(() => {
-    const handleResize = (): void => {
-      setWindowHeight(
-        window.innerHeight < minimumHeight ? minimumHeight : window.innerHeight
-      );
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
-    <CalendarContainer height={windowHeight} width={1500}>
+    <CalendarContainer screenHeight={screenHeight} screenWidth={screenWidth}>
       <TimeColumn>
         {timeSlotsWithHeight.map((timeSlot, index) => (
           <TimeSlot height={timeSlot.height} key={index}>
@@ -80,7 +72,7 @@ export const Calendar = ({ workingHours }: CalendarProps) => {
         ))}
       </TimeColumn>
 
-      <EventColumn>here Event</EventColumn>
+      <EventColumn>{children}</EventColumn>
     </CalendarContainer>
   );
 };
