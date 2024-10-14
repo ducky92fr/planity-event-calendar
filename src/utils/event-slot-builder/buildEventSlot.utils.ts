@@ -2,6 +2,7 @@ import { timeToMinutes } from "../utils";
 import {
   CalendarStarTime,
   EventOverlapsRecord,
+  EventOverlapsRecordGrouped,
   EventSlot,
   EventSlotWithPosition,
   PixelPerMinute,
@@ -35,7 +36,7 @@ export const findOverlappingEvents = (
   return eventOverlapsRecord;
 };
 
-export const convertEventsTimeToMinute = (
+export const generateEventsVerticalPosition = (
   event: EventSlot,
   calendarStartTime: CalendarStarTime,
   pixelsForEachMinute: PixelPerMinute
@@ -65,13 +66,10 @@ export const convertEventsTimeToMinute = (
   };
 };
 
-export const filterMutualOverlaps = (
+export const separateOverlapsGroups = (
   eventOverlaps: Map<number, number[]>
-): Map<number, (number | number[] | [number, number[]])[]> => {
-  const groupedOverlaps = new Map<
-    number,
-    (number | number[] | [number, number[]])[]
-  >();
+): Map<number, EventOverlapsRecordGrouped> => {
+  const groupedOverlaps = new Map<number, EventOverlapsRecordGrouped>();
 
   for (const [event, overlaps] of eventOverlaps.entries()) {
     const nonOverlappingGroup: number[] = [];

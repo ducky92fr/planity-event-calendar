@@ -39,7 +39,7 @@ export const generateTimeSlots = (
       timeSlots.push(timeLabel);
     }
 
-    // Increment by 30 minutes
+    // Increment by n minutes, default 30 minutes
     currentMinute += 30;
     if (currentMinute >= 60) {
       currentMinute = 0;

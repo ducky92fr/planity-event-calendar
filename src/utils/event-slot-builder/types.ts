@@ -6,6 +6,11 @@ export type EventSlot = {
 export type EventsSlot = EventSlot[];
 
 export type EventOverlapsRecord = Map<number, number[]>;
+export type EventOverlapsRecordGrouped = (
+  | number
+  | number[]
+  | [number, number[]]
+)[];
 
 export type ScreenDimension = {
   screenHeight: number;

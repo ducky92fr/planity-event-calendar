@@ -6,7 +6,7 @@ const meta: Meta<typeof EventSlotComponent> = {
   component: EventSlotComponent,
   args: {
     id: 1,
-    styling: {
+    position: {
       top: 100,
       left: 50,
       height: 150,

@@ -209,7 +209,7 @@ describe("buildEventSlot", () => {
             id: 4,
             top: 56.25,
             left: 0,
-            width: 1400 - 1400 / 3,
+            width: 1400 / 3,
             height: 75,
           },
         ],

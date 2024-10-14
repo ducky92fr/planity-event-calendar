@@ -1,6 +1,6 @@
 import {
-  convertEventsTimeToMinute,
-  filterMutualOverlaps,
+  generateEventsVerticalPosition,
+  separateOverlapsGroups,
   findOverlappingEvents,
 } from "./buildEventSlot.utils";
 import {
@@ -25,7 +25,11 @@ export const buildEventsSlotWithPosition = ({
 }: ParamsBuildEventsSlotWithPosition): EventsSlotToDisplay => {
   const { screenWidth } = screenDimension;
   const eventsWithTimeToMinute = events.map((event) =>
-    convertEventsTimeToMinute(event, calendarStartTime, pixelsForEachMinute)
+    generateEventsVerticalPosition(
+      event,
+      calendarStartTime,
+      pixelsForEachMinute
+    )
   );
 
   // Sort events by start time : earlier starting time will have lower distance to the top
@@ -35,7 +39,7 @@ export const buildEventsSlotWithPosition = ({
 
   const eventSlots: EventsSlotToDisplay = [];
 
-  const eventOverlapsRecord = filterMutualOverlaps(
+  const eventOverlapsRecord = separateOverlapsGroups(
     findOverlappingEvents(sortedEvents)
   );
 

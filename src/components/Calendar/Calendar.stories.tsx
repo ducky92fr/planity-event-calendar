@@ -16,6 +16,10 @@ const meta: Meta<typeof CalendarComponent> = {
         minute: 0,
       },
     },
+    screenDimension: {
+      screenWidth: 1400,
+      screenHeight: 1000,
+    },
   },
 };
 
